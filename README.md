@@ -3,6 +3,53 @@
 UniTab is a robust platform designed to prevent simultaneous application access across multiple tabs and browsers. It features real-time session management, user authentication via Google OAuth 2.0, and seamless user experience. The project consists of a **frontend** (React) and a **backend** (Node.js, Express, and Socket.IO) for real-time communication.
 
 ---
+## **Database Design**
+Below is the database design for UniTab:
+
+<img width="832" alt="image" src="https://github.com/user-attachments/assets/56ef973d-0887-4ed6-bc5a-24fbdb75b566">
+
+You can view the interactive database diagram [here](https://dbdiagram.io/d/67598ca146c15ed4790b8918)
+---
+
+---
+## **UI**
+
+Login Page
+
+<img width="805" alt="image" src="https://github.com/user-attachments/assets/8cf9215a-ff98-4e6f-a0aa-f60ec3554561">
+
+
+Home / Dashboard Page
+
+<img width="1241" alt="image" src="https://github.com/user-attachments/assets/7d678dc7-a909-4bb4-b381-0814fc5179b6">
+
+
+Search Filter (on application name)
+
+
+<img width="1228" alt="image" src="https://github.com/user-attachments/assets/82049165-5fd2-4aed-98b7-6115ce10c201">
+
+<img width="1202" alt="image" src="https://github.com/user-attachments/assets/50213c6c-e6d6-46df-8739-2cac871353e6">
+
+
+Multiple Tab Detection
+
+
+<img width="1339" alt="image" src="https://github.com/user-attachments/assets/2c20ae28-7488-46e6-852a-bc7043b38ee1">
+
+
+After clicking the `Cancel` option (User redirected to the home screen in second tab)
+
+
+<img width="1470" alt="image" src="https://github.com/user-attachments/assets/eb3571f3-8e6b-481c-80bf-e613fc0474e8">
+  
+
+After clicking the `Logout of all the other tabs` (User redirected to the home screen in first tab)
+
+
+<img width="1478" alt="image" src="https://github.com/user-attachments/assets/e3960620-f025-433f-996d-28403dd48e91">
+
+
 
 ## **Features**
 
@@ -28,7 +75,7 @@ UniTab is a robust platform designed to prevent simultaneous application access 
 - Socket.IO Client for real-time updates
 
 ### **Backend**
-- Node.js with Express.js
+- Node.js with Express.js + TypeScript
 - MongoDB with Mongoose
 - Google Auth Library for OAuth
 - Socket.IO for WebSocket communication
