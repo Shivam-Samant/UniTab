@@ -2,21 +2,6 @@ import { Request, Response, NextFunction } from "express";
 import { verifyJWT } from "../utils/jwt.util";
 import { User } from "../models/user.model";
 import { verifyGoogleToken } from "../utils/googleAuth.util";
-import { activeSessions } from "../utils/socket.util"; // Replace with Redis for production
-
-export const validateAppAccess = (req: Request, res: Response, next: NextFunction) => {
-  const { userId, appId, tabId } = req.body;
-
-  const existingSession = Object.values(activeSessions).find(
-    (session) => session.userId === userId && session.appId === appId && session.tabId !== tabId
-  );
-
-  if (existingSession) {
-    return res.status(409).json({ message: "Another tab/browser is already using this application." });
-  }
-
-  next();
-}
 
 export const authenticate = async (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers.authorization?.split(" ")[1]; // Expect 'Bearer <token>'
