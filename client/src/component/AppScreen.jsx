@@ -8,7 +8,7 @@ const socket = io(`${process.env.REACT_APP_SOCKET_URL}`);
 const AppScreen = () => {
   const { id: appId } = useParams();
   const navigate = useNavigate();
-  const userId = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
   const tabId = sessionStorage.getItem("tabId") || crypto.randomUUID();
   sessionStorage.setItem("tabId", tabId);
 
@@ -20,13 +20,11 @@ const AppScreen = () => {
       return;
     }
 
-    console.log({userId, appId, tabId})
     // Notify the server when the app is opened
     socket.emit("app-opened", { userId, appId, tabId });
 
     // Listen for conflict notification
     socket.on("conflict", () => {
-      console.log("Conflict detected");
       setConflictDialogOpen(true);
     });
 

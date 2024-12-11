@@ -16,7 +16,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<RedirectedLogin />} />
         <Route path="/dashboard" element={<ProtectedDashboard />} />
-        <Route path="/app/:id" element={<ProtectedAppScreen />} />
+        <Route path="/applications/:id" element={<ProtectedAppScreen />} />
         <Route path="/" element={<ProtectedDashboard />} />
       </Routes>
     </Router>

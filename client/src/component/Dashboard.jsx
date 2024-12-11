@@ -32,16 +32,16 @@ const Dashboard = () => {
     setFilteredApps(filtered);
   }, [searchTerm, applications]);
 
- const handleApplicationClick = async (appId) => {
+ const handleApplicationClick = async (app) => {
     try {
       // Log application selection
       await axios.post(`${process.env.REACT_APP_BACKEND_URL}/applications/select`, {
         userId: localStorage.getItem('accessToken'),
-        appId,
+        appId: app.id,
       });
 
       // Navigate to the application screen
-      navigate(`/applications/${appId}`);
+      navigate(`/applications/${app.id}`);
     } catch (error) {
       console.error("Error logging application selection:", error);
     }

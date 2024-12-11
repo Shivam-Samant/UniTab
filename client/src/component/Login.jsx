@@ -8,16 +8,15 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleSuccess = async (credentialResponse) => {
-    console.log({credentialResponse})
     try {
       const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/auth/google`, {
         token: credentialResponse.credential,
       });
-      console.log({response})
 
       const { data = {} } = response.data
 
       localStorage.setItem("accessToken", data.token);
+      localStorage.setItem("userId", data.userId);
       if (data.refreshToken) {
         localStorage.setItem("refreshToken", data.refreshToken);
       }
