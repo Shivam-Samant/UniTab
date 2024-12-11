@@ -30,8 +30,6 @@ export const setupSocket = (io: Server) => {
     });
 
     socket.on("log-out-other-tabs", ({ appId, userId, tabId }) => {
-      console.log("log-out-other-tabs:", { appId, userId, tabId });
-
       Object.entries(activeSessions).forEach(([socketId, session]) => {
         if (session.appId === appId && session.userId === userId && session.tabId !== tabId) {
           // Notify the conflicting tabs to log out
@@ -42,8 +40,6 @@ export const setupSocket = (io: Server) => {
     });
 
     socket.on("cancel-session", ({ tabId }) => {
-      console.log("cancel-session:", { tabId });
-
       Object.entries(activeSessions).forEach(([socketId, session]) => {
         if (session.tabId === tabId) {
           delete activeSessions[socketId];

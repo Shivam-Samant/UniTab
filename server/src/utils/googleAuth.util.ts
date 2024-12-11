@@ -12,7 +12,6 @@ const client = new OAuth2Client(CLIENT_ID);
  * @returns Decoded token payload containing user information.
  */
 export const verifyGoogleToken = async (token: string) => {
-  console.log('Verifying Google Token', { token, CLIENT_ID})
   try {
     const ticket = await client.verifyIdToken({
       idToken: token,

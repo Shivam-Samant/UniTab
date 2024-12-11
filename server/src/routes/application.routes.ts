@@ -6,6 +6,6 @@ import { asyncWrapper } from "../utils/asyncWrapper.util"
 const router = Router();
 
 router.get("/", asyncWrapper(authenticate), applicationController.getApplications);
-router.get("/select", asyncWrapper(authenticate), applicationController.handleApplicationSelect);
+router.post("/select", asyncWrapper(authenticate), applicationController.handleApplicationSelect);
 
 export default router;

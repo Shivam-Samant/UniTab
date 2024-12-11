@@ -50,7 +50,7 @@ class AuthController {
         console.log("An error occurred while save the audit logs for email address:", email, error);
       }
 
-      res.status(200).json({ message: "Login successful", data: { token: jwt } });
+      res.status(200).json({ message: "Login successful", data: { token: jwt, userId: user._id } });
     } catch (error) {
       console.error("Error during Google login:", error);
       res.status(500).json({ error: "Internal server error" });
