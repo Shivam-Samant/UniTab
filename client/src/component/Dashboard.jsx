@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, TextField, Grid2 as Grid, Card, CardContent, Typography, Box } from "@mui/material";
+import { Container, TextField, Grid, Card, CardContent, Typography, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "../utils/axios";
 
