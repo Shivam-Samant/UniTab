@@ -41,13 +41,13 @@ You can view the interactive database diagram [here](https://dbdiagram.io/d/6759
 
 
 
-### **After clicking the `Cancel` option (User redirected to the home screen in second tab)**
+### **Upon selecting the `Cancel` option (User is redirected to the home screen on the second tab)**
 
 
 <img width="1470" alt="image" src="https://github.com/user-attachments/assets/eb3571f3-8e6b-481c-80bf-e613fc0474e8">
   
 
-### **After clicking the `Logout of all the other tabs` (User redirected to the home screen in first tab)**
+### **Upon selecting `Logout of all the other tabs` (User is redirected to the home screen on the first tab)**
 
 
 <img width="1478" alt="image" src="https://github.com/user-attachments/assets/e3960620-f025-433f-996d-28403dd48e91">
