@@ -37,6 +37,9 @@ Multiple Tab Detection
 
 <img width="1339" alt="image" src="https://github.com/user-attachments/assets/2c20ae28-7488-46e6-852a-bc7043b38ee1">
 
+<img width="1295" alt="image" src="https://github.com/user-attachments/assets/c87c1d17-6dbd-483f-ba80-5eb2f143ad8a" />
+
+
 
 After clicking the `Cancel` option (User redirected to the home screen in second tab)
 
