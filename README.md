@@ -6,7 +6,7 @@ UniTab is a robust platform designed to prevent simultaneous application access 
 ## **Database Design**
 Below is the database design for UniTab:
 
-<img width="832" alt="image" src="https://github.com/user-attachments/assets/56ef973d-0887-4ed6-bc5a-24fbdb75b566">
+<img width="812" alt="image" src="https://github.com/user-attachments/assets/eb64e564-8eba-4ef2-a60a-52604821da90" />
 
 You can view the interactive database diagram [here](https://dbdiagram.io/d/67598ca146c15ed4790b8918)
 ---
