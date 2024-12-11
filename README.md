@@ -50,7 +50,7 @@ UniTab is a robust platform designed to prevent simultaneous application access 
 
 1. **Clone the Repository**:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Shivam-Samant/UniTab.git
    cd UniTab/server
    ```
 
@@ -76,7 +76,7 @@ UniTab is a robust platform designed to prevent simultaneous application access 
 
 1. **Clone the Repository**:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Shivam-Samant/UniTab.git
    cd UniTab/client
    ```
 
