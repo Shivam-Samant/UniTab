@@ -1,5 +1,7 @@
 # UniTab
 
+UniTab is a robust platform designed to prevent simultaneous application access across multiple tabs and browsers. It features real-time session management, user authentication via Google OAuth 2.0, and seamless user experience. The project consists of a **frontend** (React) and a **backend** (Node.js, Express, and Socket.IO) for real-time communication.
+
 ---
 
 ## **Features**
