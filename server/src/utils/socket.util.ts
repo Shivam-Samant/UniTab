@@ -1,4 +1,7 @@
-import { Server } from "socket.io";
+import Ably from "ably";
+
+// Initialize the Ably client
+const ably = new Ably.Realtime(process.env.ABLY_API_KEY!);
 
 // Structure to manage active sessions
 interface ActiveSession {
@@ -9,49 +12,47 @@ interface ActiveSession {
 
 export const activeSessions: Record<string, ActiveSession> = {}; // Replace this with Redis in production
 
-export const setupSocket = (io: Server) => {
-  io.on("connection", (socket) => {
-    socket.on("app-opened", ({ userId, appId, tabId }) => {
-      // Check for conflicting sessions (excluding the current tab)
-      const conflictingSessions = Object.entries(activeSessions).filter(
-        ([, session]) => session.userId === userId && session.appId === appId && session.tabId !== tabId
-      );
+export const setupAbly = () => {
+  const channel = ably.channels.get("app-sessions");
 
-      if (conflictingSessions.length > 0) {
-        // Notify the current tab of the conflict
-        io.to(socket.id).emit("conflict", {
+  channel.subscribe("app-opened", (message) => {
+    const { userId, appId, tabId } = message.data;
+
+    // Check for conflicting sessions (excluding the current tab)
+    const conflictingSessions = Object.entries(activeSessions).filter(
+      ([, session]) => session.userId === userId && session.appId === appId && session.tabId !== tabId
+    );
+
+    if (conflictingSessions.length > 0) {
+      // Notify the current tab of the conflict
+      channel.publish(`conflict-${tabId}`, {
+        appId,
+        message: "Another tab opened this application.",
+      });
+    }
+
+    // Register the current session
+    activeSessions[tabId] = { userId, appId, tabId };
+  });
+
+  channel.subscribe("log-out-other-tabs", (message) => {
+    const { appId, userId, tabId } = message.data;
+
+    Object.entries(activeSessions).forEach(([storedTabId, session]) => {
+      if (session.appId === appId && session.userId === userId && session.tabId !== tabId) {
+        // Notify the conflicting tabs to log out
+        channel.publish(`logged-out-${storedTabId}`, {
           appId,
-          message: "Another tab opened this application.",
+          message: "You were logged out from another tab.",
         });
+        delete activeSessions[storedTabId];
       }
-
-      // Register the current session
-      activeSessions[socket.id] = { userId, appId, tabId };
     });
+  });
 
-    socket.on("log-out-other-tabs", ({ appId, userId, tabId }) => {
-      Object.entries(activeSessions).forEach(([socketId, session]) => {
-        if (session.appId === appId && session.userId === userId && session.tabId !== tabId) {
-          // Notify the conflicting tabs to log out
-          io.to(socketId).emit("logged-out", { appId, message: "You were logged out from another tab." });
-          delete activeSessions[socketId];
-        }
-      });
-    });
+  channel.subscribe("cancel-session", (message) => {
+    const { tabId } = message.data;
 
-    socket.on("cancel-session", ({ tabId }) => {
-      Object.entries(activeSessions).forEach(([socketId, session]) => {
-        if (session.tabId === tabId) {
-          delete activeSessions[socketId];
-        }
-      });
-
-      socket.disconnect();
-    });
-
-    socket.on("disconnect", () => {
-      delete activeSessions[socket.id];
-      console.log("Client disconnected:", socket.id);
-    });
+    delete activeSessions[tabId];
   });
 };

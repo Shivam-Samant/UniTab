@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Box, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
-import { io } from "socket.io-client";
+import Ably from "ably";
 
-const socket = io(`${process.env.REACT_APP_SOCKET_URL}`);
+const ably = new Ably.Realtime({ key: process.env.REACT_APP_ABLY_API_KEY });
 
 const AppScreen = () => {
   const { id: appId } = useParams();
@@ -20,35 +20,50 @@ const AppScreen = () => {
       return;
     }
 
-    // Notify the server when the app is opened
-    socket.emit("app-opened", { userId, appId, tabId });
+    const channel = ably.channels.get("app-sessions");
 
-    // Listen for conflict notification
-    socket.on("conflict", () => {
-      setConflictDialogOpen(true);
-    });
+    // Notify the server when the app is opened
+    channel.publish("app-opened", { userId, appId, tabId });
+
+    // Listen for conflict notifications
+    const conflictHandler = (message) => {
+      if (message.name === `conflict-${tabId}`) {
+        setConflictDialogOpen(true);
+      }
+    };
 
     // Listen for logout notifications
-    socket.on("logged-out", () => {
-      alert("You have been logged out from another session.");
-      navigate("/");
-    });
+    const loggedOutHandler = (message) => {
+      if (message.name === `logged-out-${tabId}`) {
+        alert("You have been logged out from another session.");
+        navigate("/");
+      }
+    };
+
+    channel.subscribe(conflictHandler);
+    channel.subscribe(loggedOutHandler);
 
     return () => {
       // Notify the server when the app is closed
-      socket.emit("app-closed", { userId, appId, tabId });
+      channel.publish("cancel-session", { tabId });
+      channel.unsubscribe(conflictHandler);
+      channel.unsubscribe(loggedOutHandler);
     };
   }, [appId, navigate, userId, tabId]);
 
   const handleLogoutOtherTabs = () => {
+    const channel = ably.channels.get("app-sessions");
+
     // Notify the server to log out all other tabs
-    socket.emit("log-out-other-tabs", { userId, appId, tabId });
+    channel.publish("log-out-other-tabs", { userId, appId, tabId });
     setConflictDialogOpen(false);
   };
 
   const handleCancel = () => {
+    const channel = ably.channels.get("app-sessions");
+
     // Notify the server to cancel the current session
-    socket.emit("cancel-session", { tabId });
+    channel.publish("cancel-session", { tabId });
     setConflictDialogOpen(false);
     navigate("/");
   };

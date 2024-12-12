@@ -3,25 +3,15 @@ dotenv.config();
 
 import express, { Request, Response } from "express";
 import cors from "cors";
-import { Server } from "socket.io";
-import { createServer } from "http";
-import { setupSocket } from "./utils/socket.util"
+import { setupAbly } from "./utils/socket.util"
 import { connectDB } from "./configs/db.config";
 import APP_ROUTES from "./routes";
 import "./utils/googleAuth.util"
 
 const app = express();
-const server = createServer(app);
-const io = new Server(server, {
-    cors: {
-        origin: process.env.CLIENT_URL || "http://localhost:3000",
-        methods: ["GET", "POST"],
-        credentials: true,
-      },
-});
 const PORT = process.env.PORT || 8000;
 
-setupSocket(io);
+setupAbly();
 
 // DB Connection
 connectDB()
@@ -42,4 +32,4 @@ app.get("/api/", (req: Request, res: Response) => {
   res.send("UniTab Application");
 });
 
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
