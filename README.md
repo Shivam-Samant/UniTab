@@ -14,17 +14,17 @@ You can view the interactive database diagram [here](https://dbdiagram.io/d/6759
 ---
 ## **UI**
 
-Login Page
+### **Login Page**
 
 <img width="805" alt="image" src="https://github.com/user-attachments/assets/8cf9215a-ff98-4e6f-a0aa-f60ec3554561">
 
 
-Home / Dashboard Page
+### **Home / Dashboard Page**
 
 <img width="1241" alt="image" src="https://github.com/user-attachments/assets/7d678dc7-a909-4bb4-b381-0814fc5179b6">
 
 
-Search Filter (on application name)
+### **Search Filter (on application name)**
 
 
 <img width="1228" alt="image" src="https://github.com/user-attachments/assets/82049165-5fd2-4aed-98b7-6115ce10c201">
@@ -32,7 +32,7 @@ Search Filter (on application name)
 <img width="1202" alt="image" src="https://github.com/user-attachments/assets/50213c6c-e6d6-46df-8739-2cac871353e6">
 
 
-Multiple Tab Detection
+### **Multiple Tab Detection**
 
 
 <img width="1339" alt="image" src="https://github.com/user-attachments/assets/2c20ae28-7488-46e6-852a-bc7043b38ee1">
@@ -41,17 +41,20 @@ Multiple Tab Detection
 
 
 
-After clicking the `Cancel` option (User redirected to the home screen in second tab)
+### **Upon selecting the `Cancel` option (User is redirected to the home screen on the second tab)**
 
 
 <img width="1470" alt="image" src="https://github.com/user-attachments/assets/eb3571f3-8e6b-481c-80bf-e613fc0474e8">
   
 
-After clicking the `Logout of all the other tabs` (User redirected to the home screen in first tab)
+### **Upon selecting `Logout of all the other tabs` (User is redirected to the home screen on the first tab)**
 
 
 <img width="1478" alt="image" src="https://github.com/user-attachments/assets/e3960620-f025-433f-996d-28403dd48e91">
 
+### **Audit Logs for the activities**
+
+<img width="1131" alt="image" src="https://github.com/user-attachments/assets/d42623b6-6365-423e-9365-97c5770acadf" />
 
 
 ## **Features**
